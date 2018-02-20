@@ -1,22 +1,18 @@
-package sample;
+package com.chess;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import sample.config.MainConfig;
-import sample.controller_elements.Util;
-import sample.controller_elements.ViewLoader;
-import sample.network.model.Client;
-import sample.network.model.OperationType;
-import sample.network.model.RequestCode;
-import sample.network.model.Response;
-import sample.network.model.model.Player;
+import com.chess.config.MainConfig;
+import com.chess.controller_elements.Util;
+import com.chess.controller_elements.ViewLoader;
+import com.chess.network.Client;
+import network.OperationType;
+import network.RequestCode;
+import network.Response;
+import network.model.Player;
 
 import java.io.IOException;
 
@@ -54,7 +50,7 @@ public class RegisterController {
             return;
         }
 
-        Player player = new Player(null, username, firstName, secondName, password, color);
+        Player player = new Player(null, username, firstName, secondName, password);
 
         Response response = Client.getInstance().send(OperationType.REGISTER_USER, player);
 

@@ -1,4 +1,4 @@
-package sample.controller_elements;
+package com.chess.controller_elements;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;

@@ -1,4 +1,4 @@
-package sample;
+package com.chess;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

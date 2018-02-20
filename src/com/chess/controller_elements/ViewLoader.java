@@ -1,11 +1,11 @@
-package sample.controller_elements;
+package com.chess.controller_elements;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import sample.config.ApplicationProperties;
+import com.chess.config.ApplicationProperties;
 
 import java.io.IOException;
 

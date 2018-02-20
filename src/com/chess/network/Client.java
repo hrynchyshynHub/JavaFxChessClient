@@ -1,8 +1,11 @@
-package sample.network.model;
+package com.chess.network;
 
 import com.sun.istack.internal.NotNull;
-import sample.config.ApplicationProperties;
-import sample.controller_elements.Util;
+import com.chess.config.ApplicationProperties;
+import com.chess.controller_elements.Util;
+import network.OperationType;
+import network.RequestCode;
+import network.Response;
 
 import java.io.*;
 import java.net.Socket;

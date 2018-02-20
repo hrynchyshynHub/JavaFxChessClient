@@ -1,7 +1,7 @@
-package sample.config;
+package com.chess.config;
 
 
-import sample.network.model.model.Player;
+import network.model.Player;
 
 public class MainConfig {
     private static Player player;

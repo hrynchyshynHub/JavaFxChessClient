@@ -1,4 +1,4 @@
-package sample.config;
+package com.chess.config;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -17,7 +17,6 @@ public class ApplicationProperties {
         try {
             Properties properties = new Properties();
             properties.load(new FileInputStream("resources/config.properties"));
-
             port = Integer.valueOf(properties.getProperty("port"));
             host = properties.getProperty("host");
             height = Integer.valueOf(properties.getProperty("height"));
