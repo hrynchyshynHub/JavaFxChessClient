@@ -1,6 +1,7 @@
 package com.chess;
 
 import com.chess.config.MainConfig;
+import com.chess.model.ChessBoard;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -32,12 +34,19 @@ public class MenuControlller {
 
 
     public void newGame(ActionEvent event) throws IOException{
-        Stage stage = (Stage)btnNewGame.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("view/ChessBoard.fxml"));
-        stage.setScene(new Scene(root, 1600, 800));
+        Stage stage;
+        Parent root;
+        stage = (Stage)btnNewGame.getScene().getWindow();
+
+        ChessBoard chessBoard = new ChessBoard();
+        Scene scene = new Scene(chessBoard.createContent());
+
+        stage.setScene(scene);
         stage.show();
     }
-    public void loadGame(ActionEvent event){}
+    public void loadGame(ActionEvent event){
+
+    }
     public void exit(ActionEvent event){
         System.exit(0);
     }
