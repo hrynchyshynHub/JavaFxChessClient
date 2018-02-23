@@ -22,13 +22,6 @@ public class ChessBoardController {
 
     @FXML
     public void initialize() {
-//        Stage stage = (Stage)vbox.getScene().getWindow();
-        ChessBoard chessBoard = new ChessBoard();
-        Scene scene = new Scene(chessBoard.createContent());
-
-//        stage.setScene(scene);
-//        stage.show();
-
 
     }
 

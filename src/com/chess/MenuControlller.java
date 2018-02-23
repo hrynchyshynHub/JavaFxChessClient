@@ -33,13 +33,13 @@ public class MenuControlller {
     private AnchorPane pane;
 
 
-    public void newGame(ActionEvent event) throws IOException{
+    public void newGame(ActionEvent event){
         Stage stage;
         Parent root;
         stage = (Stage)btnNewGame.getScene().getWindow();
 
         ChessBoard chessBoard = new ChessBoard();
-        Scene scene = new Scene(chessBoard.createContent());
+        Scene scene = new Scene(chessBoard.createContent(), 480, 480);
 
         stage.setScene(scene);
         stage.show();

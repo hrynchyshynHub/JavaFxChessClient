@@ -1,19 +1,31 @@
 package com.chess.model;
 
-
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import static com.chess.model.ChessBoard.CELL_SIZE;
 
 public class Cell extends Rectangle{
     private Piece piece;
+    private int x;
+    private char y;
+    private String id;
+    private Color color;
+    private ChessBoard chessBoard;
 
-    public Cell(boolean light, int x, int y ){
-        setWidth(x * CELL_SIZE);
-        setHeight(y * CELL_SIZE);
-        relocate(x * CELL_SIZE, y * CELL_SIZE);
-        setFill(light ? Color.valueOf("#feb") : Color.valueOf("582"));
-
+    public Cell(Color color, int x, char y, ChessBoard chessBoard){
+        super(100,100);
+        this.chessBoard = chessBoard;
+        this.x = ++x;
+        this.y = y;
+        this.id = x + "" + y;
+        setX(x * CELL_SIZE);
+        setY((y-97) * CELL_SIZE);
+        setFill(color);
+        setOnMouseClicked( e -> {
+//            if(getPiece() != null) {
+                chessBoard.setSelectedCell(this);
+//            }
+        });
     }
     public boolean hasPiece(){
         return piece != null;
@@ -27,4 +39,12 @@ public class Cell extends Rectangle{
         this.piece = piece;
     }
 
+    public String getCellId() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return getFill().toString();
+    }
 }
