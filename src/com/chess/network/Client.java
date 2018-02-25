@@ -32,12 +32,10 @@ public class Client {
     synchronized public Response send(OperationType operationType, @NotNull Object... value) {
         try (Socket socket = this.socket) {
             out.writeObject(operationType);
-
             for (Object obj : value) {
                 out.writeObject(obj);
             }
             out.flush();
-
             return (Response) in.readObject();
         } catch (IOException | ClassNotFoundException | NullPointerException e) {
             e.printStackTrace();

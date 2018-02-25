@@ -1,7 +1,6 @@
 package com.chess.model;
 
 
-import com.chess.config.ApplicationProperties;
 import javafx.scene.Parent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -14,33 +13,34 @@ public class ChessBoard{
     public static final int CELL_SIZE = 60;
 
     private Cell [][]board = new Cell[BOARD_SIZE][BOARD_SIZE];
+    private GridPane root = new GridPane();
 
     private Cell selectedCell = null;
 
     public Parent createContent(){
-        GridPane root = new GridPane();
-        root.setPrefSize(ApplicationProperties.getWidth(), ApplicationProperties.getHeight());
-
         boolean isWhite = true;
         Color color = Color.WHITE;
-        for (int i = 7; i >= 0; i--) {
-            for (int j = 0; j < 8; j++) {
-                isWhite = !isWhite;
-                if( j == 7){
-                    isWhite = !isWhite;
+        for(int i = 7; i >= 0 ; i--){
+            for(int j = 0; j < 8; j++){
+                if ((j % 2 == 1 && i % 2 == 1) || (j % 2 == 0 && i % 2 == 0)) {
+                    color = Color.WHITE;
+                } else {
+                    color = Color.BLACK;
                 }
-                color = (isWhite) ?  Color.BLACK :  Color.WHITE;
                 board[i][j] = new Cell(color, i, (char) (j + 97), this);
-
-                GridPane.setRowIndex(board[i][j], j);
-                GridPane.setColumnIndex(board[i][j], i);
-                root.getChildren().add(board[i][j]);
-
-                System.out.print('[' + board[i][j].getCellId() + ']');
+                GridPane.setRowIndex(board[i][j], 8-i);
+                GridPane.setColumnIndex(board[i][j], j);
+                root.getChildren().addAll(board[i][j]);
+                System.out.print('[' + board[i][j].getCellId() + board[i][j].getColor() + ']'  );
             }
             System.out.println();
-        }
+            }
         return root;
+    }
+
+    public void initializeWhitePieces(){
+        getCellById("8a").setPiece(new Piece("BlackRock"));
+
     }
 
     private Piece createPiece(PieceType type, int x, int y){
@@ -52,7 +52,7 @@ public class ChessBoard{
         Cell foundCell = null;
         for(int i = 0; i < 8; i++){
             for(int j =0 ; j < 8; j++){
-                if(board[i][j].getId().equalsIgnoreCase(id)) foundCell = board[i][j];
+                if(board[i][j].getCellId().equalsIgnoreCase(id)) foundCell = board[i][j];
             }
         }
         return foundCell;

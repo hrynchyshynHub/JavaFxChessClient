@@ -1,7 +1,10 @@
 package com.chess;
 
+import com.chess.config.ApplicationProperties;
 import com.chess.config.MainConfig;
+import com.chess.controller_elements.Util;
 import com.chess.model.ChessBoard;
+import com.chess.network.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +16,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import network.OperationType;
+import network.RequestCode;
+import network.Response;
 
 import java.io.IOException;
 
@@ -34,15 +40,21 @@ public class MenuControlller {
 
 
     public void newGame(ActionEvent event){
-        Stage stage;
+        Stage stage = (Stage)btnNewGame.getScene().getWindow();
         Parent root;
-        stage = (Stage)btnNewGame.getScene().getWindow();
 
-        ChessBoard chessBoard = new ChessBoard();
-        Scene scene = new Scene(chessBoard.createContent(), 480, 480);
+        Response response = Client.getInstance().send(OperationType.CREATE_GAME, MainConfig.getUser());
 
-        stage.setScene(scene);
-        stage.show();
+        if(response.getRequestCode().equals(RequestCode.ERROR)) {
+            Util.showAlert("error", response.getData().toString(), "");
+        }else if(response.getRequestCode().equals(RequestCode.OK)){
+            Util.showAlert("Game created", "Waiting for oponent");
+            ChessBoard chessBoard = new ChessBoard();
+            Scene scene = new Scene(chessBoard.createContent());
+            chessBoard.initializeWhitePieces();
+            stage.setScene(scene);
+            stage.show();
+        }
     }
     public void loadGame(ActionEvent event){
 

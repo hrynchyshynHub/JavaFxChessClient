@@ -1,7 +1,10 @@
 package com.chess.model;
 
+import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+
+
 import static com.chess.model.ChessBoard.CELL_SIZE;
 
 public class Cell extends Rectangle{
@@ -20,6 +23,7 @@ public class Cell extends Rectangle{
         this.id = x + "" + y;
         setX(x * CELL_SIZE);
         setY((y-97) * CELL_SIZE);
+        this.color = color;
         setFill(color);
         setOnMouseClicked( e -> {
 //            if(getPiece() != null) {
@@ -37,7 +41,11 @@ public class Cell extends Rectangle{
 
     public void setPiece(Piece piece) {
         this.piece = piece;
+        Label label = new Label("Hi");
+        piece.getChildren().addAll(this, label);
     }
+
+
 
     public String getCellId() {
         return id;
@@ -46,5 +54,13 @@ public class Cell extends Rectangle{
     @Override
     public String toString() {
         return getFill().toString();
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 }
