@@ -41,7 +41,9 @@ public class ChessBoard{
     public void initializeWhitePieces(){
 
     }
+    public void initializeBlackPieces(){
 
+    }
     private Piece createPiece(PieceType type, int x, int y){
         Piece piece = new Piece(type, x, y);
         return piece;

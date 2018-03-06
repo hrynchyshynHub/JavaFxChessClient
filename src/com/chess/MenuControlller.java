@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import network.OperationType;
 import network.RequestCode;
 import network.Response;
+import network.model.NetworkGameBoard;
 
 import java.io.IOException;
 
@@ -56,6 +57,7 @@ public class MenuControlller {
             Util.showAlert("error", response.getData().toString(), "");
         }else if(response.getRequestCode().equals(RequestCode.OK)){
             Util.showAlert("Game created", "Waiting for oponent");
+            MainConfig.setNetworkGameBoard((NetworkGameBoard) response.getData());
             ChessBoard chessBoard = new ChessBoard();
             Scene scene = new Scene(chessBoard.createContent());
             chessBoard.initializeWhitePieces();

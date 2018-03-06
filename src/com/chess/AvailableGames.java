@@ -2,16 +2,19 @@ package com.chess;
 
 import com.chess.config.MainConfig;
 import com.chess.controller_elements.Util;
+import com.chess.model.ChessBoard;
 import com.chess.network.Client;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import network.OperationType;
 import network.RequestCode;
@@ -67,7 +70,14 @@ public class AvailableGames {
                             if(response.getRequestCode() == RequestCode.ERROR){
                                 Util.showAlert("Can`t join", "Error");
                             }else{
+                                Stage stage = (Stage)tableView.getScene().getWindow();
                                 Util.showAlert("Succesful join", "Success");
+                                MainConfig.setNetworkGameBoard((NetworkGameBoard) response.getData());
+                                ChessBoard chessBoard = new ChessBoard();
+                                Scene scene = new Scene(chessBoard.createContent());
+                                chessBoard.initializeBlackPieces();
+                                stage.setScene(scene);
+                                stage.show();
                             }
 
                         });
