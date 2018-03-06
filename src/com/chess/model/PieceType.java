@@ -16,12 +16,13 @@ public enum PieceType {
     ROCK_B("Chess_rock_b.png");
 
     private String pathToImage;
+    private static final String root = "D:\\mentorship\\Client\\src\\com\\chess\\model\\";
 
     PieceType(String pathToImage){
         this.pathToImage = pathToImage;
     }
 
     public String getPathToImage() {
-        return pathToImage;
+        return root + pathToImage;
     }
 }

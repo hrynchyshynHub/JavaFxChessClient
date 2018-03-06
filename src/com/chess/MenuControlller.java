@@ -3,11 +3,13 @@ package com.chess;
 import com.chess.config.ApplicationProperties;
 import com.chess.config.MainConfig;
 import com.chess.controller_elements.Util;
+import com.chess.controller_elements.ViewLoader;
 import com.chess.model.ChessBoard;
 import com.chess.network.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -38,11 +40,16 @@ public class MenuControlller {
     @FXML
     private AnchorPane pane;
 
+    @FXML
+    public void initialize(){
+        welcomelabel.setLabelFor(btnNewGame);
+        welcomelabel.setFont(new Font(25));
+        pane.getChildren().add(welcomelabel);
+    }
 
     public void newGame(ActionEvent event){
         Stage stage = (Stage)btnNewGame.getScene().getWindow();
         Parent root;
-
         Response response = Client.getInstance().send(OperationType.CREATE_GAME, MainConfig.getUser());
 
         if(response.getRequestCode().equals(RequestCode.ERROR)) {
@@ -56,17 +63,15 @@ public class MenuControlller {
             stage.show();
         }
     }
-    public void loadGame(ActionEvent event){
 
+    public void loadGame(ActionEvent event){
+        ViewLoader viewLoader = new ViewLoader((Node) event.getSource());
+        viewLoader.loadScene("../view/availableGames.fxml", "Games");
     }
+
     public void exit(ActionEvent event){
         System.exit(0);
     }
 
-    @FXML
-    public void initialize(){
-        welcomelabel.setLabelFor(btnNewGame);
-        welcomelabel.setFont(new Font(25));
-        pane.getChildren().add(welcomelabel);
-    }
+
 }

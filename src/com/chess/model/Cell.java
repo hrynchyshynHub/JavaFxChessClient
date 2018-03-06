@@ -8,12 +8,14 @@ import javafx.scene.shape.Rectangle;
 import static com.chess.model.ChessBoard.CELL_SIZE;
 
 public class Cell extends Rectangle{
+
     private Piece piece;
     private int x;
     private char y;
     private String id;
     private Color color;
     private ChessBoard chessBoard;
+
 
     public Cell(Color color, int x, char y, ChessBoard chessBoard){
         super(100,100);
@@ -41,8 +43,7 @@ public class Cell extends Rectangle{
 
     public void setPiece(Piece piece) {
         this.piece = piece;
-        Label label = new Label("Hi");
-        piece.getChildren().addAll(this, label);
+
     }
 
 

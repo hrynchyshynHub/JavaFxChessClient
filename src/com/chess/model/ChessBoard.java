@@ -39,7 +39,6 @@ public class ChessBoard{
     }
 
     public void initializeWhitePieces(){
-        getCellById("8a").setPiece(new Piece("BlackRock"));
 
     }
 
